@@ -1,4 +1,3 @@
-from flask import Flask, render_template, jsonify, request
 from src.helper import download_embeddings
 from dotenv import load_dotenv
 import os
@@ -22,9 +21,6 @@ from huggingface_hub import login
 
 # Authenticate with Hugging Face using your token
 login(token=HUGGINGFACE_API_KEY)
-
-
-# Creating LLM model from Hugging Face hub
 from langchain_huggingface import HuggingFaceEndpoint
 repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
 llm = HuggingFaceEndpoint(
@@ -33,8 +29,6 @@ llm = HuggingFaceEndpoint(
     temperature=0.5,
     huggingfacehub_api_token=HUGGINGFACE_API_KEY,
 )
-
-# Generating Answer
 def generateAnswer(ques):
     query = ques
     print (index.describe_index_stats())
@@ -65,21 +59,5 @@ def generateAnswer(ques):
 
     return response
 
-# Creating enpoints
-app = Flask(__name__)
-
-@app.route("/")
-def Index():
-    return render_template('chat.html')
-
-@app.route("/get", methods=["GET", "POST"])
-def chat():
-    msg = request.form["msg"]
-    input = msg
-    print(input)
-    result = generateAnswer(input)
-    print("Response : ", result)
-    return str(result)
-
-if __name__ == '__main__':
-    app.run(host= "127.0.0.1", port= 8080, debug= True)
+ques = input("Ask your question")
+print(generateAnswer(ques))
