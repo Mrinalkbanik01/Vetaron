@@ -1,7 +1,7 @@
 # Vetaron
 It is an end-to-end website using **Generative AI** to answer queries related to animal problems.The website basically has a ChatBOT which works by using **RAG (Retrieval-Augmented Generation)** on an Encyclopaedia of animal disease , symptoms and its cure.
 
-###TechStack:
+### TechStack:
 * HuggingFace
 * LangChain
 * PineCone
